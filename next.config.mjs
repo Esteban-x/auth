@@ -1,4 +1,13 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        fs: false, // Ignorer fs côté client
+      };
+    }
+    return config;
+  },
+};
 
 export default nextConfig;
